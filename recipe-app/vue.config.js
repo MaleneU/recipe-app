@@ -4,5 +4,5 @@ module.exports = defineConfig({
 })
 
 module.exports = {
-  publicPath: '/mfd-team2/',
+  publicPath: '/recipe-app/',
 }
