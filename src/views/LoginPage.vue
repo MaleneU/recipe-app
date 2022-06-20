@@ -86,8 +86,12 @@ validations() {
         );
 
         const { jwt, user } = res.data;
+        console.log(res.data);
         window.localStorage.setItem("jwt", jwt);
         window.localStorage.setItem("userData", JSON.stringify(user));
+        
+        window.localStorage.setItem("bookmarks", JSON.stringify(user.bookmarks));
+        console.log(window.localStorage.bookmarks)
         this.$router.push("/");
         
       } catch (e) {

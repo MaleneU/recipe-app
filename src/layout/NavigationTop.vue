@@ -25,6 +25,7 @@
 
             <div class="login-cointer">
               <div class="profil">
+                 <router-link to="/bookmarks" v-if="user">Bookmarks</router-link>
                 <router-link to="/profile" v-if="user"
                   ><img :src="profileImgUrl" alt="Profil" class="profil-img" />
                   <div class="user-loggin">
@@ -66,6 +67,7 @@ export default {
     logout() {
       window.localStorage.removeItem("jwt");
       window.localStorage.removeItem("userData");
+      window.localStorage.removeItem("bookmarks");
       this.$router.go("/feed");
     },
     toggle() {

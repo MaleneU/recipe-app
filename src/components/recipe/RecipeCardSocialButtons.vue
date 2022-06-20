@@ -5,12 +5,13 @@
             <span class="material-icons-round" v-else>favorite_border</span>
             
         </button>
-        <button class="bookmark"><span class="material-icons-round">bookmark_border</span></button>
+        <button class="bookmark" @click="addItemToBookmark(this.recipe)"><span class="material-icons-round">bookmark_border</span></button>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+
 
 export default {
     props: ["recipe"],
@@ -18,8 +19,9 @@ export default {
         return {
             loggedInUser: JSON.parse(localStorage.getItem('userData')),
             recipeLiked: false,
-            recipeLikes: this.recipe.attributes.likes.data
-            
+            recipeLikes: this.recipe.attributes.likes.data,
+             bookmarks: null,
+            curRecipe: this.recipe
         }
     },
     methods: {
@@ -54,10 +56,52 @@ export default {
                 // console.log(this.recipe.attributes.likes.data.map((x) => x.id = 1) > 0)
             }
             
-        }
+        },
+         async addItemToBookmark(item) {
+       
+                         
+                    if(window.localStorage.getItem('userData')) {
+                        
+                        let bookmarkItem
+                        if(this.bookmarks) {
+                            bookmarkItem = {
+                                label: this.recipe.id,
+                                savedRecipe: item,
+                                users_permissions_user: JSON.parse(window.localStorage.getItem('userData')).id
+                            }
+                            this.bookmarks.push(bookmarkItem)
+                            //set to localstorage
+                            window.localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks))
+                            await this.axios.post(`${process.env.VUE_APP_STRAPI}api/bookmarks`, {
+                                ...bookmarkItem,
+                            }, 
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${window.localStorage.getItem('jwt')}`,
+                                },
+                            })
+                            const res = await this.axios.get(`${process.env.VUE_APP_STRAPI}api/users/${bookmarkItem.users_permissions_user}`, {
+                                headers: {
+                                    Authorization: `Bearer ${window.localStorage.getItem('jwt')}`,
+                                }
+                            })
+                            const user  = res.data
+                            window.localStorage.setItem('userData', JSON.stringify(user));
+                            window.localStorage.setItem('bookmarks', JSON.stringify(user.bookmarks))
+                        }
+                    } 
+                }
+            
     },
-    mounted() {
+     computed: {
+         
+        },
 
+    mounted() {
+//console.log(this.recipe.id)
+//if(window.localStorage.bookmarks) {
+ //               this.bookmarks = JSON.parse(window.localStorage.getItem('bookmarks'))
+   //             }
     }
 }
 </script>

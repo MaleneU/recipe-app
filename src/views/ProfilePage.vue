@@ -87,6 +87,7 @@ export default {
     logout() {
       window.localStorage.removeItem("jwt");
       window.localStorage.removeItem("userData");
+      window.localStorage.removeItem("bookmarks");
       this.$router.go("/feed");
     },
     updateProfileImg(userId){
@@ -95,7 +96,7 @@ export default {
         userId +
         ".jpg");
     } catch (ex) {
-      this.profileImgUrl = "/mfd-team2/img/profile/profile-placeholder.png";
+      this.profileImgUrl = "/recipe-app/img/profile/profile-placeholder.png";
     }
     },
     fetchPublicProfile(){

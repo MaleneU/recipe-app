@@ -9,6 +9,8 @@ import Login from '../views/LoginPage.vue'
 import ForgotPassword from '../views/ForgottenPassword.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import RecipeSteps from '../views/RecipeSteps.vue'
+import BookmarksPage from '../views/BookmarksPage.vue'
+import BookmarkDetails from '../views/BookmarkDetails.vue'
 
 const routes = [
   {
@@ -82,6 +84,16 @@ const routes = [
     path: '/:catchAll(.*)',
     name: 'Not Found',
     
+  },
+  {
+    path: '/bookmarks',
+    name: 'Bookmarks',
+    component: BookmarksPage
+  },
+  {
+    path: '/bookmarks/:id',
+    name: 'BookmarkDetails',
+    component: BookmarkDetails
   }
 ]
 
