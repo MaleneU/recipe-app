@@ -72,9 +72,8 @@ export default {
                             this.bookmarks.push(bookmarkItem)
                             //set to localstorage
                             window.localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks))
-                            await this.axios.post(`${process.env.VUE_APP_STRAPI}api/bookmarks`, {
-                                ...bookmarkItem
-                            }, 
+                            const test = { ...bookmarkItem }
+                            await this.axios.post(`${process.env.VUE_APP_STRAPI}api/bookmarks`, test
                             )
                             const res = await this.axios.get(`${process.env.VUE_APP_STRAPI}api/users/${bookmarkItem.users_permissions_user}`, {
                                 headers: {
