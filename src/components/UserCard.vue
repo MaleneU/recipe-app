@@ -24,7 +24,7 @@ export default {
             this.user.id +
             ".jpg");
             } catch (ex) {
-                this.profileImgUrl = "/mfd-team2/img/profile/profile-placeholder.png";
+                this.profileImgUrl = "/recipe-app/img/profile/profile-placeholder.png";
             }
     }
 

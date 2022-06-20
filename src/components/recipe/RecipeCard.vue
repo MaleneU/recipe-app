@@ -56,7 +56,7 @@ export default {
     data(){
         return{
             cardAuthor: this.recipe.attributes.users_permissions_user.data,
-            cardImg: '/mfd-team2/img/food/placeholder.png',
+            cardImg: '/recipe-app/img/food/placeholder.png',
             numberOfIngredients: this.recipe.attributes.recipe_ingredients.data.length,
             emoji: '&#128336;',
             clickTimeStamp: 0
@@ -80,10 +80,7 @@ export default {
         } else {
             console.log('no emoji')
         }
-        if(this.recipe.attributes.Image)
-        {
-            this.cardImg = this.recipe.attributes.Image.data.attributes.formats.medium.url
-        }
+        
     }
 }
 </script>
