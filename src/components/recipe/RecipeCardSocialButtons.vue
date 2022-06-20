@@ -20,7 +20,7 @@ export default {
             loggedInUser: JSON.parse(localStorage.getItem('userData')),
             recipeLiked: false,
             recipeLikes: this.recipe.attributes.likes.data,
-             bookmarks: null,
+            bookmarks: JSON.parse(window.localStorage.getItem('bookmarks')),
             curRecipe: this.recipe
         }
     },
@@ -61,25 +61,21 @@ export default {
        
                          
                     if(window.localStorage.getItem('userData')) {
-                        
+                         const { id: label } = item
                         let bookmarkItem
-                        if(this.bookmarks) {
+                        if(this.bookmarks.findIndex(recipe => recipe.id === item.label) === -1) {
                             bookmarkItem = {
-                                label: this.recipe.id,
-                                savedRecipe: item,
+                                label,
+                                savedRecipe: this.curRecipe,
                                 users_permissions_user: JSON.parse(window.localStorage.getItem('userData')).id
                             }
                             this.bookmarks.push(bookmarkItem)
                             //set to localstorage
                             window.localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks))
                             await this.axios.post(`${process.env.VUE_APP_STRAPI}api/bookmarks`, {
-                                ...bookmarkItem,
+                                ...bookmarkItem
                             }, 
-                            {
-                                headers: {
-                                    Authorization: `Bearer ${window.localStorage.getItem('jwt')}`,
-                                },
-                            })
+                            )
                             const res = await this.axios.get(`${process.env.VUE_APP_STRAPI}api/users/${bookmarkItem.users_permissions_user}`, {
                                 headers: {
                                     Authorization: `Bearer ${window.localStorage.getItem('jwt')}`,
