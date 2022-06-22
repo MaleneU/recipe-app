@@ -13,3 +13,4 @@ module.exports = {
       favicon16: 'img/icons/favicon-16x16.png',
   }
 }
+}
