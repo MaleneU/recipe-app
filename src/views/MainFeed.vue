@@ -1,8 +1,5 @@
 <template>
-  <SearchBar/>
-
   <div class="wrapper">
-  <h3>Daily Inspiration</h3>
   <BaseCarrousel slide-width="medium" :items="this.$store.state.recipes" slider-id="1" >
     <template v-slot:item="{ item }">
       <RecipeCard :recipe="item" slide-width="medium" />
@@ -10,8 +7,6 @@
   </BaseCarrousel>
   </div>
   
-
-  <h3>Recent Recipes</h3>
   <BaseCarrousel slide-width="small" :items="recipes" slider-id="2" >
     <template v-slot:item="{ item }">
       <RecipeCard :recipe="item" slide-width="small" />
@@ -30,7 +25,6 @@
 
 <script>
 import RecipeCard from '@/components/recipe/RecipeCard.vue'
-import SearchBar from '../components/search/SearchBar.vue'
 import BaseCarrousel from '../components/BaseCarrousel.vue'
 import UserCard from '../components/UserCard.vue'
 
@@ -38,7 +32,6 @@ export default {
   name: 'MainFeed',
   components: { 
     RecipeCard,
-    SearchBar,
     BaseCarrousel,
     UserCard
    },
@@ -60,10 +53,6 @@ export default {
 </script>
 
 <style>
-
-.wrapper{
-  margin-top: 100px;
-}
 
   .carrousel{
     overflow:auto;

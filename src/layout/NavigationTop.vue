@@ -13,7 +13,11 @@
 
         <div class="icon">
           <div class="item" v-if="user">
-            <span class="material-icons-round">notifications</span>
+            <router-link to="/bookmarks">
+            <span class="material-icons-round">collections_bookmark</span>
+            
+            </router-link>
+            
           </div>
 
           <div class="user-container">
@@ -25,7 +29,7 @@
 
             <div class="login-cointer">
               <div class="profil">
-                 <router-link to="/bookmarks" v-if="user">Bookmarks</router-link>
+                 
                 <router-link to="/profile" v-if="user"
                   ><img :src="profileImgUrl" alt="Profil" class="profil-img" />
                   <div class="user-loggin">
@@ -48,7 +52,7 @@ export default {
     return {
       user: {},
       active: false,
-      profileImgUrl: "/mfd-team2/img/profile/profile-placeholder.png",
+      profileImgUrl: "/recipe-app/img/profile/profile-placeholder.png",
     };
   },
   mounted() {

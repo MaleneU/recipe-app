@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       user: {},
-      profileImgUrl: "/mfd-team2/img/profile/profile-placeholder.png",
+      profileImgUrl: "/recipe-app/img/profile/profile-placeholder.png",
       profileImgAlt: "",
       loggedIn: false,
       myProfile: false

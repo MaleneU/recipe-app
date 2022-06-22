@@ -44,13 +44,29 @@ header {
 
   //items 
 
-  .item{
+  .item { a {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
-      margin-right: 10px;
-      color: grey;
+      margin-right: 14px;
+      margin-top: 6px;
+      color: #000;
+      text-decoration: none;
+
+      &:visited {
+        text-decoration: none;
+        color: 000;
+        text-decoration: none;
+      }
+
+      &:hover {
+        text-decoration: none;
+        opacity: 0.5;
+    }
+  }
+
+
   }
 
   .plus-item{

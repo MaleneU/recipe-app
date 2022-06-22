@@ -5,7 +5,8 @@
       <span class="material-icons-round" v-else>favorite_border</span>
     </button>
     <button class="bookmark" @click="addItemToBookmark(this.recipe)">
-      <span class="material-icons-round">bookmark_border</span>
+      <span class="material-icons-round" v-if="recipeBookmarked">bookmark</span>
+      <span class="material-icons-round" v-else>bookmark_border</span>
     </button>
   </div>
 </template>
@@ -22,8 +23,7 @@ export default {
       recipeLikes: this.recipe.attributes.likes.data,
       bookmarks: JSON.parse(window.localStorage.getItem("bookmarks")),
       curRecipe: this.recipe,
-      userID: JSON.parse(window.localStorage.getItem("userData")).id,
-      recipeBookmarked: false
+      recipeBookmarked: false,
     };
   },
   methods: {
@@ -67,12 +67,10 @@ export default {
         const { id: savedRecipeID } = item;
         let bookmarkItem;
         if (
-          // fix this
-          // run if the recipe isn't already in local
-        !this.bookmarks.some(recipe => recipe.savedRecipeID === item.id)
-         //this.bookmarks.findIndex(recipe => recipe.id === item.savedRecipeID) === -1
+          // run if the recipe isn't already in localstorage
+          !this.bookmarks.some((recipe) => recipe.savedRecipeID === item.id)
         ) {
-          this.recipeBookmarked = true
+          this.recipeBookmarked = true;
           bookmarkItem = {
             savedRecipeID,
             savedRecipe: this.curRecipe,
@@ -81,48 +79,41 @@ export default {
             ).id,
           };
           this.bookmarks.push(bookmarkItem);
-          //set to localstorage
+          // set to localstorage
           window.localStorage.setItem(
             "bookmarks",
             JSON.stringify(this.bookmarks)
           );
-          console.log(bookmarkItem);
-          await this.axios.post(
-            `${process.env.VUE_APP_STRAPI}api/bookmarks`,
-            {
-              data: {
-                savedRecipeID: savedRecipeID,
-                savedRecipe: this.recipe,
-                users_permissions_user: JSON.parse(
-              window.localStorage.getItem("userData")
-            ).id
-              },
-            }
-          ); 
-          const res = await this.axios.get(`${process.env.VUE_APP_STRAPI}api/users/${this.userID}?populate=bookmarks`)
-                          const user  = res.data
-                        window.localStorage.setItem('bookmarks', JSON.stringify(user.bookmarks))         
-        } //else {
-           //this.recipeBookmarked = false
-            //const itemIndex = this.bookmarks.findIndex(bookmarkItem => bookmarkItem.savedRecipeID === item.savedRecipeID)
-              //      this.bookmarks.splice(itemIndex, 1)
-                //    window.localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks))
-
-                    //const response = await this.axios.get(`${process.env.VUE_APP_STRAPI}api/bookmarks?filters[savedRecipeID][$eq]=${item.id}`)
-                  //  const test = response.data.data[0].id
-                    //await this.axios.delete(`${process.env.VUE_APP_STRAPI}api/bookmarks/${test}`)
-            
-       // } 
+          // console.log(bookmarkItem);
+          await this.axios.post(`${process.env.VUE_APP_STRAPI}api/bookmarks`, {
+            data: {
+              savedRecipeID: savedRecipeID,
+              savedRecipe: this.recipe,
+              users_permissions_user: JSON.parse(
+                window.localStorage.getItem("userData")
+              ).id,
+            },
+          });
+          const res = await this.axios.get(
+            `${process.env.VUE_APP_STRAPI}api/users/${this.loggedInUser.id}?populate=bookmarks`
+          );
+          const user = res.data;
+          window.localStorage.setItem(
+            "bookmarks",
+            JSON.stringify(user.bookmarks)
+          );
+        }
       }
     },
   },
   computed: {},
 
   mounted() {
-    //console.log(this.recipe.id)
-    //if(window.localStorage.bookmarks) {
-    //               this.bookmarks = JSON.parse(window.localStorage.getItem('bookmarks'))
-    //             }
+    if (window.localStorage.getItem("userData")) {
+    if (this.bookmarks.some((recipe) => recipe.savedRecipeID === this.recipe.id)) {
+      this.recipeBookmarked = true;
+    }
+    }
   },
 };
 </script>

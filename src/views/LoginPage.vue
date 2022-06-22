@@ -91,7 +91,6 @@ validations() {
         window.localStorage.setItem("userData", JSON.stringify(user));
         
         window.localStorage.setItem("bookmarks", JSON.stringify(user.bookmarks));
-        console.log(window.localStorage.bookmarks)
         this.$router.push("/");
         
       } catch (e) {

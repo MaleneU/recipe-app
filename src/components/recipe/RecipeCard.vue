@@ -70,7 +70,7 @@ export default {
             if(event.timeStamp - this.clickTimeStamp < 200){
                 this.$router.push({ name: 'RecipeDetails', params: { id: this.recipe.id } })
             }
-            console.log(event.timeStamp - this.clickTimeStamp)
+           // console.log(event.timeStamp - this.clickTimeStamp)
         }
     },
     mounted(){
@@ -79,6 +79,10 @@ export default {
             document.querySelector('.emoji-'+this.recipe.id).innerHTML = '&#'+this.recipe.attributes.difficulty.data.attributes.ImageURL+';'
         } else {
             console.log('no emoji')
+        }
+        if(this.recipe.attributes.ImageURL)
+        {
+            this.cardImg = require('../../../public/img/food/'+this.recipe.attributes.ImageURL)
         }
         
     }

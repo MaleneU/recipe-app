@@ -16,7 +16,7 @@ export default createStore({
   },
   actions: {
     async fetchRecipes({ commit }){
-      const response = await axios.get(`${process.env.VUE_APP_STRAPI}api/recipes?populate=users_permissions_user,recipe_ingredients.unit,recipe_ingredients.ingredient,equipment,difficulty,likes,Image`)
+      const response = await axios.get(`${process.env.VUE_APP_STRAPI}api/recipes?populate=users_permissions_user,recipe_ingredients.unit,recipe_ingredients.ingredient,equipment,difficulty,likes,Image,steps`)
       commit('fetchRecipes', response.data.data) 
     }
   },
