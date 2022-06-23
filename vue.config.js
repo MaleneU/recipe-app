@@ -8,7 +8,8 @@ module.exports = {
   pwa: {
     name: "Cooking Time",
     themeColor: "#FF5F5F",
-    icons: {
+    msTileColor: '#FFFFFF',
+    iconPaths: {
       favicon32: 'img/icons/favicon-32x32.png',
       favicon16: 'img/icons/favicon-16x16.png',
   }
