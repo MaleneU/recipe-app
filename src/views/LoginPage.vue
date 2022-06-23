@@ -86,7 +86,7 @@ validations() {
         );
 
         const { jwt, user } = res.data;
-        console.log(res.data);
+        // console.log(res.data);
         window.localStorage.setItem("jwt", jwt);
         window.localStorage.setItem("userData", JSON.stringify(user));
         

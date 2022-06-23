@@ -6,7 +6,7 @@
         <p class="recipe__description">{{ curRecipe.Description }}</p>
       </section>
 
-      <section class="recipe__section recipe__section--ingredients">
+     <!--  <section class="recipe__section recipe__section--ingredients">
         <h3>Ingredients</h3>
         <RecipeIngredient
           v-for="ingredient in curRecipe.recipe_ingredients.data"
@@ -37,22 +37,22 @@
             :instruction="step.attributes.Instruction"
           />
         </div>
-      </section>
+      </section> -->
     </div>
   </div>
 </template>
 
 <script>
-import RecipeIngredient from "../components/recipe/RecipeIngredient.vue";
+/* import RecipeIngredient from "../components/recipe/RecipeIngredient.vue";
 import RecipeEquipment from "../components/recipe/RecipeEquipment.vue";
-import RecipeStep from "../components/recipe/RecipeStep.vue";
+import RecipeStep from "../components/recipe/RecipeStep.vue"; */
 
 export default {
-  components: {
+/*   components: {
     RecipeIngredient,
     RecipeEquipment,
     RecipeStep
-  },
+  }, */
   data() {
     return {
       name: this.$route.params.id,
