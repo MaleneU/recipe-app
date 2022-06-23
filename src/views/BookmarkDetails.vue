@@ -6,17 +6,17 @@
         <p class="recipe__description">{{ curRecipe.Description }}</p>
       </section>
 
-     <!--  <section class="recipe__section recipe__section--ingredients">
+     <section class="recipe__section recipe__section--ingredients">
         <h3>Ingredients</h3>
-        <RecipeIngredient
-          v-for="ingredient in curRecipe.recipe_ingredients.data"
-          :key="ingredient.id"
-          :amount="ingredient.attributes.Amount"
-          :unit="ingredient.attributes.unit.data.attributes.ShortName"
-          :name="ingredient.attributes.ingredient.data.attributes.Name"
-        ></RecipeIngredient>
+        <div v-for="ingredient in curRecipe.recipe_ingredients.data" :key="ingredient.id">
+            <div class="ingredient__card">
+    <div class="ingredient__info">
+        <div class="ingredient__name">{{ ingredient.attributes.ingredient.data.attributes.Name }}</div>
+    </div>
+    <div class="ingredient__amount">{{ ingredient.attributes.Amount }} {{ ingredient.attributes.unit.data.attributes.ShortName }}</div>
+</div> </div>
       </section>
-      <section class="recipe__section recipe__section--equipment">
+     <!--  <section class="recipe__section recipe__section--equipment">
         <h3>Equipment</h3>
         <div class="recipe__equipment">
           <RecipeEquipment
@@ -43,16 +43,8 @@
 </template>
 
 <script>
-/* import RecipeIngredient from "../components/recipe/RecipeIngredient.vue";
-import RecipeEquipment from "../components/recipe/RecipeEquipment.vue";
-import RecipeStep from "../components/recipe/RecipeStep.vue"; */
 
 export default {
-/*   components: {
-    RecipeIngredient,
-    RecipeEquipment,
-    RecipeStep
-  }, */
   data() {
     return {
       name: this.$route.params.id,
